@@ -1,3 +1,7 @@
+"""
+ This programme is used for syracuse lists :) !
+"""
+
 #### Fonctions secondaires
 
 
@@ -6,6 +10,9 @@ from plotly.graph_objects import Scatter, Figure
 
 ### NE PAS MODIFIER ###
 def syr_plot(lsyr):
+    """
+       Function used to plot a syracuse list
+    """
     title = "Syracuse" + " (n = " + str(lsyr[0]) + " )"
     fig = Figure({  'layout':   { 'title': {'text': title},
                                 'xaxis': {'title': {'text':"x"}},
@@ -19,7 +26,6 @@ def syr_plot(lsyr):
     fig.add_trace(t)
     fig.show()
     # fig.write_html('fig.html', include_plotlyjs='cdn')
-    return None
 #######################
 
 def syracuse_l(n):
@@ -31,9 +37,17 @@ def syracuse_l(n):
     Returns:
         list: la suite de Syracuse de source n
     """
+    u = n
+    l = []
+    l.append(u)
 
-    # votre code ici 
-    l = [ ]
+    while u != 1:
+        if u % 2 == 0:
+            u = u // 2
+        else:
+            u = (u * 3) + 1
+        l.append(u)
+
     return l
 
 def temps_de_vol(l):
@@ -45,11 +59,7 @@ def temps_de_vol(l):
     Returns:
         int: le temps de vol
     """
-    
-    # votre code ici
-
-    n = 0
-    return n
+    return len(l)
 
 def temps_de_vol_en_altitude(l):
     """Retourne le temps de vol en altitude d'une suite de Syracuse
@@ -62,9 +72,14 @@ def temps_de_vol_en_altitude(l):
     """
 
     # votre code ici
-
-    n = 0
-    return n
+    #print("l[0] found is : ", l[0])
+    #print("n found is : ", n)
+    tva = 0
+    for i,e in enumerate(l):
+        if e < l[0]:
+            tva = i
+            break
+    return tva
 
 
 def altitude_maximale(l):
@@ -76,24 +91,22 @@ def altitude_maximale(l):
     Returns:
         int: l'altitude maximale
     """
-    
-    # votre code ici
-    
-    n = 0
-    return n
+    return max(l)
 
 
 #### Fonction principale
 
 
 def main():
-
+    """
+       Main function of the programm
+    """
     # vos appels à la fonction secondaire ici
-    lsyr = syracuse_l(15)
-    syr_plot(lsyr)
-    print(temps_de_vol(lsyr))
-    print(temps_de_vol_en_altitude(lsyr))
-    print(altitude_maximale(lsyr))
+    lsyr = syracuse_l(4)
+    #syr_plot(lsyr)
+    print("tv : ", temps_de_vol(lsyr))
+    print("tva : ", temps_de_vol_en_altitude(lsyr))
+    print("am : ", altitude_maximale(lsyr))
 
 
 if __name__ == "__main__":
